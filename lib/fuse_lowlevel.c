@@ -1995,7 +1995,7 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 		outarg.max_background = se->conn.max_background;
 		outarg.congestion_threshold = se->conn.congestion_threshold;
 	}
-	if (se->conn.proto_minor >= 23)
+	if (se->conn.proto_minor > 23)
 		outarg.time_gran = se->conn.time_gran;
 
 	if (se->debug) {
@@ -2013,7 +2013,7 @@ static void do_init(fuse_req_t req, fuse_ino_t nodeid, const void *inarg)
 	}
 	if (arg->minor < 5)
 		outargsize = FUSE_COMPAT_INIT_OUT_SIZE;
-	else if (arg->minor < 23)
+	else if (arg->minor <= 23)
 		outargsize = FUSE_COMPAT_22_INIT_OUT_SIZE;
 
 	send_reply_ok(req, &outarg, outargsize);
